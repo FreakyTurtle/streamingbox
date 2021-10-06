@@ -1,0 +1,24 @@
+{
+  "properties": {
+    "message": {
+      "type": "string"
+    },
+    "requestId": {
+      "type": "string"
+    },
+    "origin": {
+      "type": "string"
+    },
+    "errorCode": {
+      "$ref": "./ErrorCode.json"
+    }
+  },
+  "required": [
+    "message",
+    "requestId",
+    "origin",
+    "errorCode"
+  ],
+  "type": "object",
+  "additionalProperties": false
+}

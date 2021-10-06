@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {                           /* Concatenate and emit output to single file. */
+    "outDir": "./dist"                        /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.spect.ts",
+    "**/*.test.ts",
+    "dist",
+    "build"
+  ]
+}

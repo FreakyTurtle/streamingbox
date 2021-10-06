@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "standard-with-typescript",
+    "standard-react"
+  ],
+  "rules": {},
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}

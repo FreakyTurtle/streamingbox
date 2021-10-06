@@ -1,0 +1,350 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "API Title",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api"
+    },
+    {
+      "url": "https://komgo.io/api"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "jwt": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "paths": {
+    "/trakk/v0/documents/verify/{hash}": {
+      "get": {
+        "description": "Verify if document with specified hash is registered access-key is required in order to obtain registered document activities",
+        "operationId": "VerifyDocument",
+        "tags": [
+          "trakk"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "hash",
+            "description": "Hash of the trakk document",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "blockchainCheck",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "[Deprecated] Specify if verification should check if document is registered on the ledger. Defaults: true"
+          },
+          {
+            "in": "query",
+            "name": "access-key",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "[Deprecated] Access key of the document used to retrieve activities"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "hash": {
+                      "type": "string"
+                    },
+                    "activities": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "activity": {
+                            "type": "string",
+                            "description": "The identifier of the activity performed on this document"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "description": "Timestamp of the activity creation"
+                          },
+                          "by": {
+                            "type": "string",
+                            "description": "The email of the user that created the activity"
+                          },
+                          "to": {
+                            "type": "string",
+                            "description": "If the activity is shared, the email of the recipient"
+                          },
+                          "note": {
+                            "type": "string",
+                            "description": "A note by the creator of this activity"
+                          }
+                        }
+                      }
+                    },
+                    "documentInfo": {}
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/paths/~1trakk~1v0~1documents~1upload/post/responses/500"
+          }
+        }
+      }
+    },
+    "/trakk/v0/documents/upload": {
+      "post": {
+        "operationId": "UploadTrakk",
+        "summary": "Upload a document and register the hash.",
+        "security": [
+          {
+            "jwt": [
+              "license:trakk",
+              "permission:trakk",
+              "permission:manageDocument",
+              "permission:crudAndShare"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fileData": {
+                    "description": "Document file data",
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "name": {
+                    "description": "Name for the file",
+                    "example": "file.pdf",
+                    "type": "string"
+                  },
+                  "context": {
+                    "description": "Arbitary context data for a document",
+                    "example": "{''someContextField':'1234'}",
+                    "type": "string"
+                  },
+                  "product": {
+                    "description": "Product for the uploaded document. If not specified, defaults to Trakk",
+                    "example": "Trakk",
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "description": "externalId for the uploaded document",
+                    "example": "1234",
+                    "type": "string"
+                  },
+                  "disableModificationProtection": {
+                    "description": "Will define if the document can be modified or not",
+                    "example": "false",
+                    "type": "string",
+                    "enum": [
+                      "true",
+                      "false"
+                    ],
+                    "default": "false",
+                    "nullable": true
+                  },
+                  "logo": {
+                    "description": "EXPERIMENTAL: Not Supported; The base64 data URL encoded image [data:image/png|data:image/jpg] or empty string to be used as the logo in the banner of the resulting stamped document",
+                    "type": "string"
+                  },
+                  "QRCodeUrl": {
+                    "description": "EXPERIMENTAL: Not Supported; A string that will be encoded as the content of the QRCode",
+                    "example": "https://foobar.com",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "fileData"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The document has been successfully uploaded and trakked, returns the hash of the document",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "origin": {
+                      "type": "string"
+                    },
+                    "errorCode": {
+                      "$ref": "#/paths/~1trakk~1v0~1documents~1upload/post/responses/409/content/application~1json/schema/properties/errorCode"
+                    },
+                    "fields": {
+                      "additionalProperties": true,
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "requestId",
+                    "origin",
+                    "errorCode",
+                    "fields"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The user does not have permission to perform this action content"
+          },
+          "409": {
+            "description": "Document Already Trakked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "origin": {
+                      "type": "string"
+                    },
+                    "errorCode": {
+                      "enum": [
+                        "EVAL01",
+                        "EVAL02",
+                        "EVAL03",
+                        "EVAL04",
+                        "EVAL05",
+                        "EVAL06",
+                        "ECNF01",
+                        "ECNF02",
+                        "ECON01",
+                        "ECON02",
+                        "ECON03",
+                        "ECON04",
+                        "ECON05",
+                        "ECON06",
+                        "ECON07",
+                        "ECON08",
+                        "EBLC01",
+                        "EBLC02",
+                        "EBLC03",
+                        "EAUT01",
+                        "EDAT01",
+                        "EDAT02",
+                        "EUXP00"
+                      ],
+                      "type": "string"
+                    },
+                    "fields": {
+                      "properties": {
+                        "source": {
+                          "enum": [
+                            "Trakk",
+                            "MagicLink"
+                          ],
+                          "type": "string"
+                        },
+                        "trakkDocHash": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "source",
+                        "trakkDocHash"
+                      ],
+                      "type": "object",
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "requestId",
+                    "origin",
+                    "errorCode",
+                    "fields"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "requestId": {
+                      "type": "string"
+                    },
+                    "origin": {
+                      "type": "string"
+                    },
+                    "errorCode": {
+                      "$ref": "#/paths/~1trakk~1v0~1documents~1upload/post/responses/409/content/application~1json/schema/properties/errorCode"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "requestId",
+                    "origin",
+                    "errorCode"
+                  ],
+                  "type": "object",
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
