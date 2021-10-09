@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/api/index.js",
   "scripts": {
-    "build": "tsc",
-    "server": "node dist/server/api/index.js",
+    "build": "tsc -p tsconfig.build.json",
+    "server": "node dist/api/index.js",
     "start": "nodemon -e ts,json --ignore 'generated/*.json' --watch src/ --exec 'rm -rf dist && tsc -p tsconfig.build.json && npm run server'",
     "test": "jest",
     "swagger": "swagger-cli bundle ./src/documentation/swagger.json --outfile ./src/documentation/generated/swagger.json --type json",

@@ -5,7 +5,7 @@ let isConnected = false
 export const connect = () => {
   return new Promise<void>((resolve, reject) => {
     if(process && process.pid) resolve()
-    process = spawn("sudo openvpn --config /home/pi/Desktop/client.ovpn")
+    process = spawn("sudo openvpn --config /home/pi/client.ovpn")
     process.stdout.on("data", data => {
       if(data.includes("Initialization Sequence Completed")) resolve()
     });
