@@ -1,9 +1,10 @@
 import { RotateRightTwoTone } from "@mui/icons-material";
-import { AppBar, Container, styled, Toolbar, Typography } from "@mui/material";
-import { keyframes } from "@mui/styled-engine";
+import { AppBar, Button, Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, styled, Toolbar, Typography } from "@mui/material";
+import { PowerSettingsNew } from "@mui/icons-material";
 import React, { useState } from "react";
 import { MainView } from "./components/MainView";
 import { SearchBox } from "./components/SearchBox";
+import axios from "axios";
 
 const Plus = styled('div')(({ theme }) => ({
   color: theme.palette.secondary.main,
@@ -30,6 +31,7 @@ const Guest = styled('span')(({ theme }) => ({
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("")
+  const [rebootOpen, setRebootOpen] = useState(false)
 
   return (
     <main>
@@ -39,12 +41,38 @@ const App: React.FC = () => {
             <Guest>guest</Guest><TV>tv</TV><Plus>+</Plus>
           </Typography>
           <SearchBox value={searchTerm} onChange={({target}) => setSearchTerm(target.value)} />
+          <IconButton onClick={() => setRebootOpen(true)} >
+            <PowerSettingsNew />
+          </IconButton>
         </Toolbar>
       </AppBar>
 
       <Container maxWidth="lg" sx={{marginTop: 18, marginBottom: 18}}>
           <MainView searchTerm={searchTerm} />
       </Container>
+
+      <Dialog
+        open={rebootOpen}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          Reboot Device
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Are you sure you would like to restart the device? Rebooting can take several minutes.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setRebootOpen(false)}>Cancel</Button>
+          <Button onClick={() => {
+            axios.get("http://localhost:3000/reboot").then((response) => setRebootOpen(false))
+          }} autoFocus>
+            Restart
+          </Button>
+        </DialogActions>
+      </Dialog>
 
     </main>
   );

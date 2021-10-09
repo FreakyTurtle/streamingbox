@@ -46,4 +46,8 @@ export const disconnect = () => {
   })
 }
 
+export const reboot = () => {
+  exec("sudo reboot", () => {})
+}
+
 export const isConn = () => (process && process.pid)

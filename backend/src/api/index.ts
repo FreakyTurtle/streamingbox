@@ -3,7 +3,7 @@ import express, {Request} from "express"
 import cors from 'cors'
 import helmet from "helmet"
 import path from 'path'
-import { connect, disconnect } from '@ft/vpn'
+import { connect, disconnect, reboot } from '@ft/vpn'
 
 const startServer = async () => {
     try {
@@ -31,6 +31,9 @@ const startServer = async () => {
           } catch (error) {
               res.status(500).send('OK') 
           }
+        })
+        app.get('/reboot', async (req, res) => {
+            reboot()
         })
 
         app.get('/*', (req, res) => {
