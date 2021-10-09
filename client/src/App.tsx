@@ -67,7 +67,7 @@ const App: React.FC = () => {
         <DialogActions>
           <Button onClick={() => setRebootOpen(false)} color="secondary">Cancel</Button>
           <Button onClick={() => {
-            axios.get("http://localhost:3000/reboot").then((response) => setRebootOpen(false))
+            axios.get("http://localhost:8080/reboot").then((response) => setRebootOpen(false))
           }} autoFocus>
             Restart
           </Button>
