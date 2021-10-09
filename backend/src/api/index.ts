@@ -14,7 +14,7 @@ const startServer = async () => {
         app.use(express.json())
         app.use(express.urlencoded({ extended: true }))
 
-        if (process.env.NODE_ENV !== 'production') app.use(cors())
+        app.use(cors())
 
         app.get('/connect', async (req, res) => {
           try {
