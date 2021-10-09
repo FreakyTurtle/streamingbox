@@ -1,4 +1,4 @@
 #!/bin/bash
 
 npm install
-npm start
+pm2 start "npm start"
