@@ -12,7 +12,7 @@ cd client
 ./init.sh
 
 echo "starting chromium" >> /home/pi/boxlogs
-chromium-browser --kiosk http://localhost:3000
+chromium-browser --kiosk http://localhost:3000 >> /home/pi/boxlogs
 
 
 
