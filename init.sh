@@ -2,8 +2,6 @@
 
 sudo npm install pm2 -g
 
-git pull
-
 cd ./backend
 ./init.sh
 cd ..
