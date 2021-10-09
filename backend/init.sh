@@ -1,4 +1,5 @@
 #!/bin/bash
 
-npm install
-npm run build
+echo "Installing backend" >> /home/pi/boxlogs
+npm install >> /home/pi/boxlogs
+npm run build >> /home/pi/boxlogs

@@ -1,3 +1,4 @@
 #!/bin/bash
 
-npm install
+echo "Installing client" >> /home/pi/boxlogs
+npm install >> /home/pi/boxlogs

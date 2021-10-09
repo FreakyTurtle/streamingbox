@@ -1,5 +1,5 @@
 #!/bin/bash
 
-echo "pulling"
-git pull
+echo "pulling" >> /home/pi/boxlogs
+git pull >> /home/pi/boxlogs
 

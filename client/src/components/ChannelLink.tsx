@@ -8,9 +8,12 @@ export const ChannelLink: React.FC<{Channel: IChannel, delay?: number}> = ({Chan
   const makeCall = async () => {
     setloading(true)
     const path = Channel.categories.includes(Category.american) ? "connect" : "disconnect"
-    // const response = await axios.get(`localhost:8080/${path}`)
-    // if(response.status === 200) 
-    window.location.href = Channel.link
+    const response = await axios.get(`localhost:8080/${path}`)
+    if(response.status === 200) {
+      return window.location.href = Channel.link
+    }
+    alert('There was an error, please contact support')
+    setloading(false)
   }
   
   return (
