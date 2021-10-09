@@ -1,4 +1,4 @@
-import { ChildProcessWithoutNullStreams, spawn} from "child_process"
+import { ChildProcessWithoutNullStreams, exec, spawn} from "child_process"
 
 let process: ChildProcessWithoutNullStreams | null = null
 let isConnected = false
@@ -6,8 +6,14 @@ export const connect = () => {
   return new Promise<void>((resolve, reject) => {
     console.log("connecting", process)
     console.log("already connecteed", (process && process.pid))
+    // exec("sudo", ["openvpn", "--config", "/home/pi/client.ovpn"], (error, stdout, stderr) => {
+    //   if(stdout.includes("Initialization Sequence Completed")) {
+    //     isConnected = true
+    //     resolve()
+    //   }
+    // })
     if(process && process.pid) resolve()
-    process = spawn("openvpn --config /home/pi/client.ovpn")
+    process = spawn("sudo", ["openvpn", "--config", "/home/pi/client.ovpn"])
     process.stdout.on("data", data => {
       console.log("process data: ", data)
       if(data.includes("Initialization Sequence Completed")) resolve()
