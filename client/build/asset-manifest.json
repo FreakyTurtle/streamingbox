@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/static/js/main.02d43bbd.chunk.js",
+    "main.js.map": "/static/js/main.02d43bbd.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.bcafd9cd.js",
+    "runtime-main.js.map": "/static/js/runtime-main.bcafd9cd.js.map",
+    "static/js/2.a4423f8b.chunk.js": "/static/js/2.a4423f8b.chunk.js",
+    "static/js/2.a4423f8b.chunk.js.map": "/static/js/2.a4423f8b.chunk.js.map",
+    "static/js/3.687672dc.chunk.js": "/static/js/3.687672dc.chunk.js",
+    "static/js/3.687672dc.chunk.js.map": "/static/js/3.687672dc.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.a4423f8b.chunk.js.LICENSE.txt": "/static/js/2.a4423f8b.chunk.js.LICENSE.txt",
+    "static/media/appletvplus.7e480da0.png": "/static/media/appletvplus.7e480da0.png",
+    "static/media/btsport.7aaf3422.png": "/static/media/btsport.7aaf3422.png",
+    "static/media/channel4.2e7fac8a.png": "/static/media/channel4.2e7fac8a.png",
+    "static/media/discovery.9ab9de91.png": "/static/media/discovery.9ab9de91.png",
+    "static/media/disneyplus.15bc10cb.png": "/static/media/disneyplus.15bc10cb.png",
+    "static/media/iplayer.d73ab700.png": "/static/media/iplayer.d73ab700.png",
+    "static/media/itv.56933a2c.png": "/static/media/itv.56933a2c.png",
+    "static/media/nbcsports.08a4cd0f.png": "/static/media/nbcsports.08a4cd0f.png",
+    "static/media/netflix.4a9d8652.png": "/static/media/netflix.4a9d8652.png",
+    "static/media/peacock.89da9276.png": "/static/media/peacock.89da9276.png",
+    "static/media/primevideo.18f10de5.png": "/static/media/primevideo.18f10de5.png",
+    "static/media/sling.d927620e.png": "/static/media/sling.d927620e.png",
+    "static/media/youtube.55199598.png": "/static/media/youtube.55199598.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bcafd9cd.js",
+    "static/js/2.a4423f8b.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.02d43bbd.chunk.js"
+  ]
+}
