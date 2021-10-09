@@ -1,5 +1,5 @@
 import { RotateRightTwoTone } from "@mui/icons-material";
-import { AppBar, Button, Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, styled, Toolbar, Typography } from "@mui/material";
+import { AppBar, Button, Container, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, styled, Toolbar, Typography } from "@mui/material";
 import { PowerSettingsNew } from "@mui/icons-material";
 import React, { useState } from "react";
 import { MainView } from "./components/MainView";
