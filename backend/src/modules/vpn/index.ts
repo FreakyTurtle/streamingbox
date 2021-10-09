@@ -15,7 +15,7 @@ export const connect = () => {
     if(process && process.pid) resolve()
     process = spawn("sudo", ["openvpn", "--config", "/home/pi/client.ovpn"])
     process.stdout.on("data", data => {
-      console.log("process data: ", data)
+      console.log("process data: ", Buffer.from(data).toString())
       if(data.includes("Initialization Sequence Completed")) resolve()
     });
     process.on('error', (error) => {
