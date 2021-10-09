@@ -7,9 +7,6 @@
   "servers": [
     {
       "url": "http://localhost:8080/api"
-    },
-    {
-      "url": "https://komgo.io/api"
     }
   ],
   "components": {
@@ -36,7 +33,8 @@
             "schema": {
               "type": "string"
             }
-          },],
+          }
+        ],
         "responses": {
           "200": {
             "description": "Ok",
@@ -51,7 +49,6 @@
                     "activities": {
                       "type": "array",
                       "items": {
-                        "$ref": "schemas/ActivityData.json"
                       }
                     },
                     "documentInfo": {
@@ -68,109 +65,6 @@
         }
       }
       
-    },
-    "/trakk/v0/documents/upload": {
-      "post": {
-        "operationId": "UploadTrakk",
-        "summary": "Upload a document and register the hash.",
-        "security": [
-          {
-            "jwt": [
-              "license:trakk",
-              "permission:trakk",
-              "permission:manageDocument",
-              "permission:crudAndShare"
-            ]
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "fileData": {
-                    "description": "Document file data",
-                    "type": "string",
-                    "format": "binary"
-                  },
-                  "name": {
-                    "description": "Name for the file",
-                    "example": "file.pdf",
-                    "type": "string"
-                  },
-                  "context": {
-                    "description": "Arbitary context data for a document",
-                    "example": "{''someContextField':'1234'}",
-                    "type": "string"
-                  },
-                  "product": {
-                    "description": "Product for the uploaded document. If not specified, defaults to Trakk",
-                    "example": "Trakk",
-                    "type": "string"
-                  },
-                  "externalId": {
-                    "description": "externalId for the uploaded document",
-                    "example": "1234",
-                    "type": "string"
-                  },
-                  "disableModificationProtection": {
-                    "description": "Will define if the document can be modified or not",
-                    "example": "false",
-                    "type": "string",
-                    "enum": ["true", "false"],
-                    "default": "false",
-                    "nullable": true
-                  },
-                  "logo": {
-                    "description": "EXPERIMENTAL: Not Supported; The base64 data URL encoded image [data:image/png|data:image/jpg] or empty string to be used as the logo in the banner of the resulting stamped document",
-                    "type": "string"
-                  },
-                  "QRCodeUrl": {
-                    "description": "EXPERIMENTAL: Not Supported; A string that will be encoded as the content of the QRCode",
-                    "example": "https://foobar.com",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "fileData"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "The document has been successfully uploaded and trakked, returns the hash of the document",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "responses/ValidationErrorResponse.json"
-          },
-          "401": {
-            "$ref": "responses/Unauthorised.json"
-          },
-          "409": {
-            "description": "Document Already Trakked",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "schemas/ValidationErrorTypeResponseITrakkDocumentData.json"
-                }
-              }
-            }
-          },
-          "500": {
-            "$ref": "responses/InternalServerError.json"
-          }
-        }
-      }
     }
   }
 }

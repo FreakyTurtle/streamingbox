@@ -5,9 +5,10 @@
   "main": "dist/api/index.js",
   "scripts": {
     "build": "tsc",
-    "start": "nodemon -e ts,json --ignore 'generated/*.json' --watch src --exec 'rm -rf dist/ && swagger-cli bundle ./src/documentation/swagger.json --outfile ./src/documentation/generated/swagger.json --type json && tsc -p tsconfig.build.json && node dist/api/index.js'",
-    "start-dev": "node dist/api/index.js",
+    "server": "node dist/server/api/index.js",
+    "start": "nodemon -e ts,json --ignore 'generated/*.json' --watch src/ --exec 'rm -rf dist && tsc -p tsconfig.build.json && npm run server'",
     "test": "jest",
+    "swagger": "swagger-cli bundle ./src/documentation/swagger.json --outfile ./src/documentation/generated/swagger.json --type json",
     "test:unit": "jest --group=unit",
     "test:integration": "jest --group=integration"
   },
@@ -22,16 +23,11 @@
     "express": "^4.17.1",
     "express-openapi-validator": "^4.12.14",
     "helmet": "^4.6.0",
-    "keccak256": "^1.0.3",
-    "knex": "^0.95.7",
     "module-alias": "^2.2.2",
-    "mongodb": "^4.0.0",
     "multer": "^1.4.2",
-    "pg": "^8.6.0",
     "swagger-cli": "^4.0.4",
     "swagger-jsdoc": "^6.1.0",
-    "swagger-ui-express": "^4.1.6",
-    "uuid": "^8.3.2"
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
@@ -40,7 +36,6 @@
     "@types/multer": "^1.4.7",
     "@types/node": "^16.3.3",
     "@types/swagger-ui-express": "^4.1.2",
-    "@types/uuid": "^8.3.1",
     "jest": "^27.0.6",
     "jest-runner-groups": "^2.1.0",
     "nodemon": "^2.0.9",

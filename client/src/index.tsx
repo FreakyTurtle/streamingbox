@@ -3,10 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import { themeOptions } from './theme';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={createTheme(themeOptions)}>
+      <CssBaseline />
+        <div 
+          style={{
+            minWidth: "100%",
+            minHeight: "100vh"
+          }}
+        > 
+          <App />
+        </div>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
