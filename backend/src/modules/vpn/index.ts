@@ -26,7 +26,7 @@ export const connect = () => {
 }
 
 export const disconnect = () => {
-  console.log("disconnecting")
+  console.log("disconnecting", process)
   console.log("disconnected already", (!process || !process.pid))
   if(!process || !process.pid) return 
   console.log("killing process");
