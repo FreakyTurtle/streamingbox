@@ -2,10 +2,10 @@
 
 git pull
 
-cd backend
+cd ./backend
 ./init.sh
 cd ..
-cd client
+cd ./client
 ./init.sh
 cd ..
 
