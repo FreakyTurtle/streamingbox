@@ -29,7 +29,10 @@ export const disconnect = () => {
   return new Promise<void>((resolve, reject) => {
     console.log("disconnecting", process)
     console.log("disconnected already", (!process || !process.pid))
-    if(!process || !process.pid) return 
+    if(!process || !process.pid){
+      resolve()
+      return
+    }
     console.log("killing process");
     process.kill('SIGTERM')
     const exit_proc = spawn("sudo", ["killall", "-SIGINT", "openvpn"])
@@ -38,8 +41,15 @@ export const disconnect = () => {
       isConnected = false
       resolve()
     })
+    exit_proc.stdout.on("close", () => {
+      process = null
+      isConnected = false
+      resolve()
+    })
     exit_proc.stdout.on("error", (error) => {
       console.log(error)
+      process = null
+      isConnected = false
       reject()
     })
     //or process.kill(job.pid, 'SIGTERM')

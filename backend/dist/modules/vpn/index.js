@@ -27,8 +27,10 @@ const disconnect = () => {
     return new Promise((resolve, reject) => {
         console.log("disconnecting", process);
         console.log("disconnected already", (!process || !process.pid));
-        if (!process || !process.pid)
+        if (!process || !process.pid) {
+            resolve();
             return;
+        }
         console.log("killing process");
         process.kill('SIGTERM');
         const exit_proc = (0, child_process_1.spawn)("sudo", ["killall", "-SIGINT", "openvpn"]);
@@ -37,8 +39,15 @@ const disconnect = () => {
             isConnected = false;
             resolve();
         });
+        exit_proc.stdout.on("close", () => {
+            process = null;
+            isConnected = false;
+            resolve();
+        });
         exit_proc.stdout.on("error", (error) => {
             console.log(error);
+            process = null;
+            isConnected = false;
             reject();
         });
     });

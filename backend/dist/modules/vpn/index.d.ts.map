@@ -1,1 +1,1 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/modules/vpn/index.ts"],"names":[],"mappings":"AAIA,eAAO,MAAM,OAAO,qBAqBnB,CAAA;AAED,eAAO,MAAM,UAAU,qBAmBtB,CAAA;AAED,eAAO,MAAM,MAAM,YAElB,CAAA;AAED,eAAO,MAAM,MAAM,iCAAiC,CAAA"}
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../src/modules/vpn/index.ts"],"names":[],"mappings":"AAIA,eAAO,MAAM,OAAO,qBAqBnB,CAAA;AAED,eAAO,MAAM,UAAU,qBA6BtB,CAAA;AAED,eAAO,MAAM,MAAM,YAElB,CAAA;AAED,eAAO,MAAM,MAAM,iCAAiC,CAAA"}
