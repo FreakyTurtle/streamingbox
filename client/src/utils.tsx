@@ -11,6 +11,7 @@ import primevideo from './logos/primevideo.png'
 import apple from './logos/appletvplus.png'
 import discovery from './logos/discovery.png'
 import youtube from './logos/youtube.png'
+import zoom from './logos/zoom.png'
 
 export enum Category {
   sport = "Sport",
@@ -32,6 +33,16 @@ export interface IChannel {
 
 export const ChannelList: IChannel[] = [
     {
+      name: "Zoom",
+      link: "https://us02web.zoom.us/join",
+      logo: zoom,
+      categories: [
+        Category.livetv,
+        Category.sport,
+        Category.casual
+      ]
+    },
+    {
       name: "Sling TV",
       logo: sling,
       link: "https://watch.sling.com/browse/my-tv",
@@ -45,7 +56,7 @@ export const ChannelList: IChannel[] = [
     {
       name: "NBC Peacock",
       logo: peacock,
-      link: "https://www.peacocktv.com/watch/home",
+      link: "https://peacocktv.com",
       categories: [
         Category.livetv,
         Category.sport,
