@@ -17,7 +17,7 @@ until $(curl --output /dev/null --silent --head --fail http://localhost:3000); d
 done
 
 echo "starting chromium" >> /home/pi/boxlogs
-chromium-browser --kiosk http://localhost:3000 >> /home/pi/boxlogs
+chromium-browser --kiosk http://localhost:3000 --use-gl=egl >> /home/pi/boxlogs
 
 
 
